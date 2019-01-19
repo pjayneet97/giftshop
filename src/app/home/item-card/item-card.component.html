@@ -1,0 +1,15 @@
+<ion-card class="welcome-card">
+  <ion-img style="height:150px; width:100%;" *ngIf="item.display_type=='image'" src="{{item.display_url}}"></ion-img>
+  <iframe height="300px" width="100%" *ngIf="item.display_type=='vedio'" src="https://www.youtube.com/embed/tCWsNQGvW3s" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <ion-card-header>
+    <ion-card-subtitle></ion-card-subtitle>
+    <ion-card-title>{{item.title}}</ion-card-title>
+    <b style="color:green">RS {{item.price}}</b>
+  </ion-card-header>
+  <ion-card-content>
+    <p>{{item.description}}</p>
+    
+    <ion-button color="primary" (click)="buyNow()" ion-button > <ion-icon name="cart"></ion-icon>Buy Now</ion-button>
+    <ion-button color="default" (click)="viewDetails(item)" fill="outline"> View Details</ion-button>
+  </ion-card-content>
+</ion-card>

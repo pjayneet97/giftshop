@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-icon style="font-size: 40px" (click)="listAll()" name="arrow-back"></ion-icon>
+      </ion-buttons>
+    <ion-title>item-details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+        <ion-row>
+          <ion-col size="12" size-lg="1">         
+          </ion-col>
+          <ion-col size="12" size-lg="3">
+              <div class="item-profile" text-center #profilePic [style.background-image]="'url(' + item.display_url + ')'">
+                  <img src="{{item.display_url}}" alt="">
+                </div>
+                
+                  <div class="item-detail" padding>
+                    <h2>{{item.title}}</h2>
+                    <b style="color:green">RS {{item.price}}</b>
+                    <p>{{item.description}}</p>
+                    <ion-button (click)="buyNow()" color="primary" ion-button > <ion-icon name="cart"></ion-icon>Buy Now</ion-button>
+                  </div>
+          </ion-col>
+          <ion-col size="12" size-lg="6" class="item-detail" padding>
+                <iframe width="100%" height="300px" src="https://www.youtube.com/embed/BBGDZep7vSs?rel=0&amp;showinfo=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <h2>Description</h2>
+                    <ul style="margin-top:-3px;">
+                      <li style="margin:4px;" *ngFor="let point of item.points">{{point}}</li>
+                    </ul>
+                        <h2>Delivery Details</h2>
+                        <ul style="margin-top:-3px;">
+                          <li style="margin:4px;" *ngFor="let point of item.deliveries">{{point}}</li>
+                        </ul>
+
+                        <h2>Customization Details</h2>
+                          <ul style="margin-top:-3px;">
+                            <li style="margin:4px;" *ngFor="let point of item.customizations">{{point}}</li>
+                          </ul>
+        </ion-col>
+        <ion-col size="12" size-lg="1">
+         
+        </ion-col>
+      
+        </ion-row>
+</ion-content>

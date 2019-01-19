@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Buy Now</ion-title>
+    <ion-buttons slot="end">
+        <ion-icon (click)="dismissModal()" style="font-size:40px;" name="close"></ion-icon>
+    </ion-buttons>
+    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <form (ngSubmit)="submit(form)" #form="ngForm">
+      <ion-item>
+          <ion-input ngModel name="name" required type="text" placeholder="Name"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-input ngModel name="mobile" required type="text" placeholder="Mobile"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-input ngModel name="otherdetails" required type="text" placeholder="Other Customizations (optional)"></ion-input>
+        </ion-item>
+        <br>
+        <ion-button type="submit" expand="block">Submit</ion-button>
+  </form>
+</ion-content>
