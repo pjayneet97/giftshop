@@ -22,7 +22,11 @@ export class EnquiryPage implements OnInit {
     this.modlCtrl.dismiss(status)
   }
   submit(data:NgForm){
-    this.db.collection('enquiries').add(data.value)
+    let date=new Date()
+    console.log(date)
+    let enq = {item:this.item,data:data.value,status:0,timestamp:date}
+    console.log(enq)
+    this.db.collection('enquiries').add(enq)
     data.reset()
     this.dismissModal(true)
   }

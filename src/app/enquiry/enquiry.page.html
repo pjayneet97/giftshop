@@ -9,6 +9,7 @@
 </ion-header>
 
 <ion-content padding>
+    <h3>Item : {{item.title}}</h3>
   <form (ngSubmit)="submit(form)" #form="ngForm">
       <ion-item>
           <ion-input ngModel name="name" required type="text" placeholder="Name"></ion-input>
@@ -20,6 +21,8 @@
             <ion-input ngModel name="otherdetails" required type="text" placeholder="Other Customizations (optional)"></ion-input>
         </ion-item>
         <br>
-        <ion-button type="submit" expand="block">Submit</ion-button>
+        <ion-button type="submit" expand="block">Submit Enquiry</ion-button>
   </form>
+<h4 text-center>OR (If using mobile phone)</h4>
+  <a href="https://api.whatsapp.com/send?phone=918955018041&text=I%20am%20intrested%20in%20buying%20{{item.title}}%20with%20product%20id%20{{item.id}}"><ion-button color="success" expand="block">Order On Whatsapp</ion-button></a>
 </ion-content>
