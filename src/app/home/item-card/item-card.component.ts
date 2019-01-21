@@ -4,6 +4,7 @@ import { ModalController, NavController, ToastController } from '@ionic/angular'
 import { EnquiryPage } from 'src/app/enquiry/enquiry.page';
 import { Router } from '@angular/router';
 import { AngularFireStorage } from '@angular/fire/storage';
+import { SafePipe } from 'src/app/pipe/safe.pipe';
 
 @Component({
   selector: 'app-item-card',
@@ -18,8 +19,9 @@ export class ItemCardComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.display=this.storage.ref('items/'+this.item.display_url).getDownloadURL()
-    console.log(this.display)
+    if(this.item.display_type=="image"){
+      this.display=this.storage.ref('items/'+this.item.display_url).getDownloadURL()
+    }
   }
   async buyNow(){
     const modal = await this.modlCtrl.create({

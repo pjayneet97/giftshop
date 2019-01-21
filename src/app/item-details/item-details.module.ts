@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { ItemDetailsPage } from './item-details.page';
+import { SafePipe } from '../pipe/safe.pipe';
 
 const routes: Routes = [
   {

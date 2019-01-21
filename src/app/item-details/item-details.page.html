@@ -13,8 +13,19 @@
           </ion-col>
           <ion-col size="12" size-lg="3">
               <div class="item-profile" text-center>
-                <img src="{{display|async}}" onError="this.src='../../../assets/items/item1.jpg'">
-                </div>
+                <!-- <img src="{{display|async}}" onError="this.src='../../../assets/items/item1.jpg'"> -->
+                      <ion-slides pager="true" [options]="slideOpts">
+        <ion-slide>
+          <img style="max-height:400px; width:100%" src="../../../assets/items/blank.png">
+        </ion-slide>
+        <ion-slide>
+          <img style="max-height:400px; width:100%" src="../../../assets/items/blank.png">
+        </ion-slide>
+        <ion-slide>
+          <img style="max-height:400px; width:100%" src="../../../assets/items/blank.png">
+        </ion-slide>
+      </ion-slides>  
+              </div>
                 
                   <div class="item-detail" padding>
                     <h2>{{item.title}}</h2>
@@ -24,7 +35,7 @@
                   </div>
           </ion-col>
           <ion-col size="12" size-lg="6" class="item-detail" padding>
-                <iframe width="100%" height="300px" src="https://www.youtube.com/embed/BBGDZep7vSs?rel=0&amp;showinfo=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe width="100%" height="300px" [src]="item.display_url" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     <h2>Description</h2>
                     <ul style="margin-top:-3px;">
                       <li style="margin:4px;" *ngFor="let point of item.points">{{point}}</li>

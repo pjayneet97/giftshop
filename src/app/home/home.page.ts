@@ -9,6 +9,9 @@ import { ItemService } from '../services/item.service';
 })
 export class HomePage implements OnInit {
   mode="list"
+  slideOpts = {
+    effect: 'flip'
+  };
   allitems
   items:Item[]
   selectedItem:Item

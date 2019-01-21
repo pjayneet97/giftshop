@@ -7,7 +7,6 @@ export interface Item{
     cost:number
     description:any
     rating:number
-    comments:{name:string,message:string,rating:number}[]
     points:string[]
     customizations:string[]
     deliveries:string[],

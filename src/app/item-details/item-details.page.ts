@@ -16,6 +16,9 @@ export class ItemDetailsPage implements OnInit {
   item:Item
   id:string
   display
+  slideOpts = {
+    effect: 'flip'
+  };
   constructor(public loadingController: LoadingController,private storage:AngularFireStorage, public toastController: ToastController,public navCtrl:NavController,public modlCtrl:ModalController ,public route:ActivatedRoute,public itemservice:ItemService) { }
 
   ngOnInit() {
