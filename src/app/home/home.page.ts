@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Item } from 'src/data/item.interface';
-import { ModalController } from '@ionic/angular';
+import { ModalController, LoadingController } from '@ionic/angular';
 import { ItemService } from '../services/item.service';
 @Component({
   selector: 'app-home',
@@ -9,13 +9,35 @@ import { ItemService } from '../services/item.service';
 })
 export class HomePage implements OnInit {
   mode="list"
+  allitems
   items:Item[]
   selectedItem:Item
-  constructor(private modalCtrl:ModalController,public itemService:ItemService ){
+  constructor(public loadingController: LoadingController,private modalCtrl:ModalController,public itemService:ItemService ){
 
   }
   ngOnInit(){
-    this.items=this.itemService.getAll()
+    this.allitems=this.itemService.getAll()
+    this.items=this.allitems
+    this.presentLoading()
+  }
+  filter(category:string){
+    this.items=this.allitems.filter(element=>{
+      if(category=='all'){
+        return true
+      }
+      else{
+        return (element.category==category)
+      }
+    })
+    this.presentLoading()
+  }
+
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      message: 'Please wait',
+      duration: 1000
+    });
+    return await loading.present();
   }
 
 

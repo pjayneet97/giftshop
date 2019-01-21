@@ -5,9 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 
 import { HomePage } from './home.page';
-import { ItemDescriptionComponent } from './item-description/item-description.component';
 import { ItemCardComponent } from './item-card/item-card.component';
-import { EnquiryPage } from '../enquiry/enquiry.page';
 
 
 @NgModule({
@@ -23,6 +21,6 @@ import { EnquiryPage } from '../enquiry/enquiry.page';
     ])
   ],
   entryComponents: [],
-  declarations: [HomePage, ItemDescriptionComponent, ItemCardComponent]
+  declarations: [HomePage,ItemCardComponent]
 })
 export class HomePageModule {}

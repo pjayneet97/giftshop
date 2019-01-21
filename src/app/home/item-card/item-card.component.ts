@@ -2,8 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Item } from 'src/data/item.interface';
 import { ModalController, NavController, ToastController } from '@ionic/angular';
 import { EnquiryPage } from 'src/app/enquiry/enquiry.page';
-import { ItemDetailsPage } from 'src/app/item-details/item-details.page';
 import { Router } from '@angular/router';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 @Component({
   selector: 'app-item-card',
@@ -12,9 +12,14 @@ import { Router } from '@angular/router';
 })
 export class ItemCardComponent implements OnInit {
   @Input() item:Item
-  constructor(public toastController: ToastController,public modlCtrl:ModalController,public navCtrl:NavController,public router:Router) { }
+  display
+  constructor(private storage: AngularFireStorage,public toastController: ToastController,public modlCtrl:ModalController,public navCtrl:NavController,public router:Router) {
+
+   }
 
   ngOnInit() {
+    this.display=this.storage.ref('items/'+this.item.display_url).getDownloadURL()
+    console.log(this.display)
   }
   async buyNow(){
     const modal = await this.modlCtrl.create({

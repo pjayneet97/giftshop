@@ -10,6 +10,7 @@ export interface Item{
     comments:{name:string,message:string,rating:number}[]
     points:string[]
     customizations:string[]
-    deliveries:string[]
+    deliveries:string[],
+    category:string
     
 }

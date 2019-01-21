@@ -12,8 +12,8 @@
           <ion-col size="12" size-lg="1">         
           </ion-col>
           <ion-col size="12" size-lg="3">
-              <div class="item-profile" text-center #profilePic [style.background-image]="'url(' + item.display_url + ')'">
-                  <img src="{{item.display_url}}" alt="">
+              <div class="item-profile" text-center>
+                <img src="{{display|async}}" onError="this.src='../../../assets/items/item1.jpg'">
                 </div>
                 
                   <div class="item-detail" padding>
