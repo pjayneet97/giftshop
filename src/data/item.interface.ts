@@ -1,15 +1,12 @@
 export interface Item{
-    id:string
-    title:string
-    display_type:string
-    display_url:string
-    price:number
-    cost:number
-    description:any
-    rating:number
-    points:string[]
-    customizations:string[]
-    deliveries:string[],
-    category:string
-    
+    id?:string
+    title?:string
+    image_url?:string
+    vedio_url?:string
+    price?:number
+    about?:string
+    description?:string[]
+    customizations?:string[]
+    deliveries?:string[],
+    category?:string    
 }

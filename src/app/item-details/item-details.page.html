@@ -13,32 +13,21 @@
           </ion-col>
           <ion-col size="12" size-lg="3">
               <div class="item-profile" text-center>
-                <!-- <img src="{{display|async}}" onError="this.src='../../../assets/items/item1.jpg'"> -->
-                      <ion-slides pager="true" [options]="slideOpts">
-        <ion-slide>
-          <img style="max-height:400px; width:100%" src="../../../assets/items/blank.png">
-        </ion-slide>
-        <ion-slide>
-          <img style="max-height:400px; width:100%" src="../../../assets/items/blank.png">
-        </ion-slide>
-        <ion-slide>
-          <img style="max-height:400px; width:100%" src="../../../assets/items/blank.png">
-        </ion-slide>
-      </ion-slides>  
+                <img style="max-height:400px; width:100%" [src]="display|async" onError="this.src='../../../assets/items/blank.png'">
               </div>
                 
                   <div class="item-detail" padding>
                     <h2>{{item.title}}</h2>
                     <b style="color:green">RS {{item.price}}</b>
-                    <p>{{item.description}}</p>
+                    <p>{{item.about}}</p>
                     <ion-button (click)="buyNow()" color="primary" ion-button > <ion-icon name="cart"></ion-icon>Buy Now</ion-button>
                   </div>
           </ion-col>
           <ion-col size="12" size-lg="6" class="item-detail" padding>
-                <iframe width="100%" height="300px" [src]="item.display_url" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe width="100%" height="300px" *ngIf="item.vedio_url" [src]="item.vedio_url|safe" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     <h2>Description</h2>
                     <ul style="margin-top:-3px;">
-                      <li style="margin:4px;" *ngFor="let point of item.points">{{point}}</li>
+                      <li style="margin:4px;" *ngFor="let point of item.description">{{point}}</li>
                     </ul>
                         <h2>Delivery Details</h2>
                         <ul style="margin-top:-3px;">

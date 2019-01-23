@@ -19,9 +19,10 @@ export class ItemCardComponent implements OnInit {
    }
 
   ngOnInit() {
-    if(this.item.display_type=="image"){
-      this.display=this.storage.ref('items/'+this.item.display_url).getDownloadURL()
-    }
+      this.getImage()
+  }
+  async getImage(){
+    this.display=this.storage.ref(this.item.image_url).getDownloadURL()
   }
   async buyNow(){
     const modal = await this.modlCtrl.create({

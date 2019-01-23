@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Item } from 'src/data/item.interface';
-import items from 'src/data/items';
 import { NavController, ModalController, ToastController, LoadingController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { ItemService } from '../services/item.service';
@@ -13,8 +12,17 @@ import { AngularFireStorage } from '@angular/fire/storage';
   styleUrls: ['./item-details.page.scss'],
 })
 export class ItemDetailsPage implements OnInit {
-  item:Item
-  id:string
+  item:Item={id:null,
+    title:null,
+    image_url:"../../../assets/items/blank.png",
+    price:null,
+    about:null,
+    description:[],
+    customizations:[],
+    deliveries:[],
+    category:null    
+}
+  id:null
   display
   slideOpts = {
     effect: 'flip'
@@ -22,11 +30,15 @@ export class ItemDetailsPage implements OnInit {
   constructor(public loadingController: LoadingController,private storage:AngularFireStorage, public toastController: ToastController,public navCtrl:NavController,public modlCtrl:ModalController ,public route:ActivatedRoute,public itemservice:ItemService) { }
 
   ngOnInit() {
-    this.route.params.subscribe(id=>{
-      this.item=this.itemservice.getItem(id.id)
-    })
-    this.display=this.storage.ref('items/'+this.item.display_url).getDownloadURL()
     this.presentLoading()
+    this.route.params.subscribe(id=>{
+    this.itemservice.getItem(id.id).subscribe(data=>{
+      this.item=data[0]
+      this.display=this.storage.ref(this.item.image_url).getDownloadURL()
+    })
+    })
+
+
   }
   listAll(){
     this.navCtrl.goBack()

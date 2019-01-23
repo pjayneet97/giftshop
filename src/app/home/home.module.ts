@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 
 import { HomePage } from './home.page';
 import { ItemCardComponent } from './item-card/item-card.component';
-import { SafePipe } from '../pipe/safe.pipe';
+
 
 
 @NgModule({
@@ -22,6 +22,6 @@ import { SafePipe } from '../pipe/safe.pipe';
     ])
   ],
   entryComponents: [],
-  declarations: [HomePage,ItemCardComponent,SafePipe]
+  declarations: [HomePage,ItemCardComponent]
 })
 export class HomePageModule {}

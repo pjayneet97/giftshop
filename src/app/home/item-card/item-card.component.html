@@ -1,6 +1,5 @@
 <ion-card class="welcome-card">
-  <img [src]="display|async" *ngIf="item.display_type=='image'" onError="this.src='../../../assets/items/item1.jpg'" style="height:200px;">
-  <iframe height="180px" width="100%" *ngIf="item.display_type=='vedio'" [src]="item.display_url|safe" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <img [src]="display|async" onError="this.src='../../../assets/items/blank.png'" style="height:200px;">
  <ion-card-header>
     <ion-card-subtitle></ion-card-subtitle>
     <ion-card-title>{{item.title}}</ion-card-title>

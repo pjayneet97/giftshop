@@ -19,9 +19,12 @@ export class HomePage implements OnInit {
 
   }
   ngOnInit(){
-    this.allitems=this.itemService.getAll()
-    this.items=this.allitems
     this.presentLoading()
+    this.allitems=this.itemService.getAll().subscribe(data=>{
+      this.items=data
+    })
+
+
   }
   filter(category:string){
     this.items=this.allitems.filter(element=>{
@@ -38,10 +41,8 @@ export class HomePage implements OnInit {
   async presentLoading() {
     const loading = await this.loadingController.create({
       message: 'Please wait',
-      duration: 1000
+      duration: 2000
     });
     return await loading.present();
   }
-
-
 }
