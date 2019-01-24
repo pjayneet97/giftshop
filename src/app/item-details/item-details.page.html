@@ -3,7 +3,7 @@
       <ion-buttons slot="start">
           <ion-icon style="font-size: 40px" (click)="listAll()" name="arrow-back"></ion-icon>
       </ion-buttons>
-    <ion-title>item-details</ion-title>
+    <ion-title><p>{{item.id}}</p></ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -11,32 +11,41 @@
         <ion-row>
           <ion-col size="12" size-lg="1">         
           </ion-col>
-          <ion-col size="12" size-lg="3">
-              <div class="item-profile" text-center>
-                <img style="max-height:400px; width:100%" [src]="display|async" onError="this.src='../../../assets/items/blank.png'">
-              </div>
-                
+          <ion-col size="12" size-lg="3">                
+              <ion-slides pager="true" [options]="slideOpts">
+                <ion-slide *ngFor="let image of display">
+                  <img style="max-height:200px;" class="center" [src]="image|async" onError="this.src='../../../assets/items/blank.png'">
+                </ion-slide>
+                <ion-slide *ngIf="item.vedio_url" padding>
+                    <iframe class="center" width="100%" height="200px" [src]="item.vedio_url|safe" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </ion-slide>
+              </ion-slides>
+
+
                   <div class="item-detail" padding>
-                    <h2>{{item.title}}</h2>
-                    <b style="color:green">RS {{item.price}}</b>
-                    <p>{{item.about}}</p>
-                    <ion-button (click)="buyNow()" color="primary" ion-button > <ion-icon name="cart"></ion-icon>Buy Now</ion-button>
+                    <h4>{{item.title}}</h4>
+                    
+                    <b style="color:green;font-size:14px"><s style="color:red">&#8377;{{item.price*110/100}}</s> &#8377;{{item.price}}</b>
+                    <p style="font-size:14px;">{{item.about}}</p>
+                    <ion-button size="medium" (click)="buyNow()" color="primary" ion-button > <ion-icon name="cart"></ion-icon>Buy Now</ion-button>
                   </div>
           </ion-col>
-          <ion-col size="12" size-lg="6" class="item-detail" padding>
-                <iframe width="100%" height="300px" *ngIf="item.vedio_url" [src]="item.vedio_url|safe" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    <h2>Description</h2>
+          <ion-col style="margin-top:-5px;" size="12" size-lg="6" class="item-detail" padding>
+
+                        
+                        <h5><ion-icon name="gift"></ion-icon> Description</h5>
+
                     <ul style="margin-top:-3px;">
-                      <li style="margin:4px;" *ngFor="let point of item.description">{{point}}</li>
+                      <li *ngFor="let point of item.description"><p style="font-size:14px;margin:-2px;">{{point}}</p></li>
                     </ul>
-                        <h2>Delivery Details</h2>
+                        <h5><ion-icon name="gift"></ion-icon> Delivery Details</h5>
                         <ul style="margin-top:-3px;">
-                          <li style="margin:4px;" *ngFor="let point of item.deliveries">{{point}}</li>
+                          <li *ngFor="let point of item.deliveries"><p style="font-size:14px;margin:-2px;">{{point}}</p></li>
                         </ul>
 
-                        <h2>Customization Details</h2>
+                        <h5><ion-icon name="gift"></ion-icon> Customization Details</h5>
                           <ul style="margin-top:-3px;">
-                            <li style="margin:4px;" *ngFor="let point of item.customizations">{{point}}</li>
+                            <li *ngFor="let point of item.customizations"><p style="font-size:14px;margin:-2px;">{{point}}</p></li>
                           </ul>
         </ion-col>
         <ion-col size="12" size-lg="1">

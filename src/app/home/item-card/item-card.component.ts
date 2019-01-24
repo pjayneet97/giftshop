@@ -22,7 +22,7 @@ export class ItemCardComponent implements OnInit {
       this.getImage()
   }
   async getImage(){
-    this.display=this.storage.ref(this.item.image_url).getDownloadURL()
+    this.display=this.storage.ref(this.item.image_url[0]).getDownloadURL()
   }
   async buyNow(){
     const modal = await this.modlCtrl.create({

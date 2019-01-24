@@ -8,11 +8,12 @@ import { ItemService } from '../services/item.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
-  mode="list"
+  covers=['../../../assets/cover1.jpeg']
   slideOpts = {
     effect: 'flip'
   };
-  allitems
+  categories=[]
+  allitems:Item[]
   items:Item[]
   selectedItem:Item
   constructor(public loadingController: LoadingController,private modalCtrl:ModalController,public itemService:ItemService ){
@@ -20,22 +21,23 @@ export class HomePage implements OnInit {
   }
   ngOnInit(){
     this.presentLoading()
-    this.allitems=this.itemService.getAll().subscribe(data=>{
-      this.items=data
+    this.itemService.getAll().subscribe(data=>{
+      this.allitems=data
+      this.items=this.allitems
+      this.getCategories()
     })
 
 
   }
   filter(category:string){
     this.items=this.allitems.filter(element=>{
-      if(category=='all'){
+      if(category.toLowerCase()=='all'){
         return true
       }
       else{
-        return (element.category==category)
+        return (element.category.toLowerCase()==category.toLowerCase())
       }
     })
-    this.presentLoading()
   }
 
   async presentLoading() {
@@ -45,4 +47,18 @@ export class HomePage implements OnInit {
     });
     return await loading.present();
   }
+
+  getCategories(){
+    this.categories.push('All')
+    this.allitems.forEach(element=>{
+      if(this.categories.indexOf(element.category)!=-1){
+        //nothing
+      }
+      else{
+        this.categories.push(element.category)
+      }    
+    })
+  }
+
+  
 }

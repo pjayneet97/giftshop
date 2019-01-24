@@ -14,7 +14,8 @@ import { AngularFireStorage } from '@angular/fire/storage';
 export class ItemDetailsPage implements OnInit {
   item:Item={id:null,
     title:null,
-    image_url:"../../../assets/items/blank.png",
+    image_url:['"../../../assets/items/blank.png"'],
+    vedio_url:"hello",
     price:null,
     about:null,
     description:[],
@@ -23,7 +24,7 @@ export class ItemDetailsPage implements OnInit {
     category:null    
 }
   id:null
-  display
+  display=[]
   slideOpts = {
     effect: 'flip'
   };
@@ -34,14 +35,16 @@ export class ItemDetailsPage implements OnInit {
     this.route.params.subscribe(id=>{
     this.itemservice.getItem(id.id).subscribe(data=>{
       this.item=data[0]
-      this.display=this.storage.ref(this.item.image_url).getDownloadURL()
+      this.item.image_url.forEach(url => {
+        this.display.push(this.storage.ref(url).getDownloadURL())
+      });
     })
     })
 
 
   }
   listAll(){
-    this.navCtrl.goBack()
+    this.navCtrl.back()
   }
   async buyNow(){
     const modal = await this.modlCtrl.create({

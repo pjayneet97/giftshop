@@ -18,6 +18,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 
 
+
 @NgModule({
   declarations: [AppComponent,EnquiryPage],
   entryComponents: [EnquiryPage],

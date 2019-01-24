@@ -9,43 +9,27 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-    <ion-toolbar  text-center color="light">
-        <ion-row>
-            <ion-col size="3" size-lg="3" size-sm="3" (click)="filter('all')">
-                <small>All</small>
-              </ion-col>
-          <ion-col size="3" size-lg="3" size-sm="3" (click)="filter('handmade')" >
-            <small>HandMade</small>
-          </ion-col>
-          <ion-col size="3" size-lg="3" size-sm="3" (click)="filter('customized')" >
-            <small>Customized</small>
-          </ion-col>
-          <ion-col size="3" size-lg="3" size-sm="3" (click)="filter('fast')">
-            <small>Fast Delivery</small>
-          </ion-col>
-        </ion-row>
-      </ion-toolbar>
+<ion-content color="light">
+      <div class="scrollmenu">
+        <a (click)="filter(category)" *ngFor="let category of categories">{{category}}</a>
+      </div>
 
 
       <ion-slides pager="true" [options]="slideOpts">
-        <ion-slide>
-          <img style="max-height:400px; width:100%" src="../../../assets/items/cover1.jpeg">
-        </ion-slide>
-        <ion-slide>
-          <img style="max-height:400px; width:100%" src="../../../assets/items/cover2.jpeg">
+        <ion-slide *ngFor="let cover of covers">
+          <img style="max-height:400px; width:100%" src="{{cover}}" onError="this.src='../../../assets/items/blank.png'">
         </ion-slide>
       </ion-slides>
 
     <ng-container>
-      <ion-grid>
+
         <ion-row>
           <ion-col size="12" size-lg="1">
 
           </ion-col>
           <ion-col size="12" size-lg="10">
-              <ion-row>
-                  <ion-col size="12" size-lg="4" size-md="6" *ngFor="let item of items">
+              <ion-row style="padding:0px;">
+                  <ion-col style="padding:0px;" size="12" size-lg="4" size-md="6" *ngFor="let item of items">
                     <app-item-card [item]="item"></app-item-card>
                   </ion-col>
                 </ion-row>
@@ -54,16 +38,7 @@
             
           </ion-col>
         </ion-row>
-      </ion-grid>
+
     </ng-container>
-    <ion-list lines="none">
-      <ion-list-header>
-        <ion-label>Resources</ion-label>
-      </ion-list-header>
-      <ion-item>
-        <ion-icon slot="start" color="medium" name="book"></ion-icon>
-        <ion-label>Ionic Documentation</ion-label>
-      </ion-item>
-    </ion-list>
 
 </ion-content>

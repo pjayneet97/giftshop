@@ -6,6 +6,8 @@ import { RouterModule } from '@angular/router';
 
 import { HomePage } from './home.page';
 import { ItemCardComponent } from './item-card/item-card.component';
+import { FooterComponent } from '../components/footer/footer.component';
+
 
 
 
@@ -22,6 +24,6 @@ import { ItemCardComponent } from './item-card/item-card.component';
     ])
   ],
   entryComponents: [],
-  declarations: [HomePage,ItemCardComponent]
+  declarations: [HomePage,ItemCardComponent,FooterComponent]
 })
 export class HomePageModule {}

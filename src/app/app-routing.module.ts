@@ -13,7 +13,9 @@ const routes: Routes = [
   { path: 'enquiry',
     loadChildren: './enquiry/enquiry.module#EnquiryPageModule' },
   { path: 'item-details/:id',
-    loadChildren: './item-details/item-details.module#ItemDetailsPageModule' }
+    loadChildren: './item-details/item-details.module#ItemDetailsPageModule' },
+  { path: 'about', loadChildren: './about/about.module#AboutPageModule' },
+  { path: 'sell', loadChildren: './sell/sell.module#SellPageModule' }
 ];
 
 @NgModule({
