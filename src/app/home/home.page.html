@@ -17,7 +17,7 @@
 
       <ion-slides pager="true" [options]="slideOpts">
         <ion-slide *ngFor="let cover of covers">
-          <img style="max-height:400px; width:100%" src="{{cover}}" onError="this.src='../../../assets/items/blank.png'">
+          <img style="width:100%" src="{{cover}}" onError="this.src='../../../assets/items/blank.png'">
         </ion-slide>
       </ion-slides>
 

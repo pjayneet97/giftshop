@@ -8,7 +8,7 @@ import { ItemService } from '../services/item.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
-  covers=['../../../assets/cover1.jpeg']
+  covers=['../../../assets/cover3.png']
   slideOpts = {
     effect: 'flip'
   };
@@ -49,14 +49,10 @@ export class HomePage implements OnInit {
   }
 
   getCategories(){
-    this.categories.push('All')
     this.allitems.forEach(element=>{
-      if(this.categories.indexOf(element.category)!=-1){
-        //nothing
-      }
-      else{
+      if(this.categories.indexOf(element.category)==-1){
         this.categories.push(element.category)
-      }    
+      }
     })
   }
 

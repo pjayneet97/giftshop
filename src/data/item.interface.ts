@@ -1,4 +1,5 @@
 export interface Item{
+    fid?:string	
     id?:string
     title?:string
     image_url?:string[]
