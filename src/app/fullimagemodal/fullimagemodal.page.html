@@ -1,0 +1,18 @@
+<ion-content fullscreen>
+ 
+    <ion-item class="close-fake" lines="none" text-center>
+      <ion-button (click)="close()" fill="clear" color="light">
+        <ion-icon name="close" slot="start"></ion-icon>
+        Back
+      </ion-button>
+    </ion-item>
+   <small padding style="color:white;">do not use phone's back button to dismiss full screen</small>
+    <ion-slides [options]="sliderOpts" #slider>
+      <ion-slide *ngFor="let image of img">
+        <div class="swiper-zoom-container">
+          <img [src]="image|async">
+        </div>
+      </ion-slide>
+    </ion-slides>
+   
+  </ion-content>

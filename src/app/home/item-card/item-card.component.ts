@@ -44,7 +44,7 @@ export class ItemCardComponent implements OnInit {
   }
   async presentToast() {
     const toast = await this.toastController.create({
-      message: 'Click to Close',
+      message: 'Thank you, We will contact you shortly ',
       showCloseButton: true,
       position: 'top',
       duration: 1500,

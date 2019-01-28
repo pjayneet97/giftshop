@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ItemService } from '../services/item.service';
 import { EnquiryPage } from '../enquiry/enquiry.page';
 import { AngularFireStorage } from '@angular/fire/storage';
+import { FullimagemodalPage } from '../fullimagemodal/fullimagemodal.page';
 
 @Component({
   selector: 'app-item-details',
@@ -28,7 +29,7 @@ export class ItemDetailsPage implements OnInit {
   slideOpts = {
     effect: 'flip'
   };
-  constructor(public loadingController: LoadingController,private storage:AngularFireStorage, public toastController: ToastController,public navCtrl:NavController,public modlCtrl:ModalController ,public route:ActivatedRoute,public itemservice:ItemService) { }
+  constructor(private modalController: ModalController,public loadingController: LoadingController,private storage:AngularFireStorage, public toastController: ToastController,public navCtrl:NavController,public modlCtrl:ModalController ,public route:ActivatedRoute,public itemservice:ItemService) { }
 
   ngOnInit() {
     this.presentLoading()
@@ -79,6 +80,17 @@ export class ItemDetailsPage implements OnInit {
       duration: 1000
     });
     return await loading.present();
+  }
+
+  openPreview(img) {
+    this.modalController.create({
+      component: FullimagemodalPage,
+      componentProps: {
+        img: img
+      }
+    }).then(modal => {
+      modal.present();
+    });
   }
 
 }

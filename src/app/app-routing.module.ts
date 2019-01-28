@@ -15,7 +15,8 @@ const routes: Routes = [
   { path: 'item-details/:id',
     loadChildren: './item-details/item-details.module#ItemDetailsPageModule' },
   { path: 'about', loadChildren: './about/about.module#AboutPageModule' },
-  { path: 'sell', loadChildren: './sell/sell.module#SellPageModule' }
+  { path: 'sell', loadChildren: './sell/sell.module#SellPageModule' },
+  { path: 'fullimagemodal', loadChildren: './fullimagemodal/fullimagemodal.module#FullimagemodalPageModule' }
 ];
 
 @NgModule({

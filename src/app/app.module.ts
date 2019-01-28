@@ -16,12 +16,14 @@ import { FormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
+import {FullimagemodalPage} from './fullimagemodal/fullimagemodal.page'
+
 
 
 
 @NgModule({
-  declarations: [AppComponent,EnquiryPage],
-  entryComponents: [EnquiryPage],
+  declarations: [AppComponent,EnquiryPage,FullimagemodalPage],
+  entryComponents: [EnquiryPage,FullimagemodalPage],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),

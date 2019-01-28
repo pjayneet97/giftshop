@@ -15,9 +15,11 @@ div.scrollmenu a {
   text-align: center;
   padding: 14px;
   text-decoration: none;
+  cursor:pointer;
 }
 
 div.scrollmenu a:hover {
-  background-color: #8f8cac;
-  color:yellow;
+  background-color: #38465f;
+  color:rgb(255, 255, 255);
+  cursor:pointer;
 }
