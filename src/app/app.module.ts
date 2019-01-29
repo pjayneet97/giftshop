@@ -20,7 +20,6 @@ import {FullimagemodalPage} from './fullimagemodal/fullimagemodal.page'
 
 
 
-
 @NgModule({
   declarations: [AppComponent,EnquiryPage,FullimagemodalPage],
   entryComponents: [EnquiryPage,FullimagemodalPage],

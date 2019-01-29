@@ -11,5 +11,5 @@ export interface Item{
     customizations?:string[]
     deliveries?:string[],
     tags?:string[],
-    category?:string    
+    category?:string   
 }

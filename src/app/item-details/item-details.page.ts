@@ -22,7 +22,7 @@ export class ItemDetailsPage implements OnInit {
     description:[],
     customizations:[],
     deliveries:[],
-    category:null    
+    category:null
 }
   id:null
   display=[]
@@ -37,6 +37,7 @@ export class ItemDetailsPage implements OnInit {
     this.itemservice.getItem(id.id).subscribe(data=>{
       this.item=data[0]
       this.item.image_url.forEach(url => {
+        console.log(url)
         this.display.push(this.storage.ref(url).getDownloadURL())
       });
     })

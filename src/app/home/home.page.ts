@@ -3,6 +3,7 @@ import { Item } from 'src/data/item.interface';
 import { ModalController, LoadingController } from '@ionic/angular';
 import { ItemService } from '../services/item.service';
 import { AngularFireStorage } from '@angular/fire/storage';
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -21,12 +22,12 @@ export class HomePage implements OnInit {
   constructor(public storage:AngularFireStorage,public loadingController: LoadingController,private modlCtrl:ModalController,public itemService:ItemService ){
 
   }
-  ngOnInit(){
-    
+  ngOnInit(){    
     this.presentLoading()
     this.itemService.getAll().subscribe(data=>{
       this.allitems=data
       this.items=this.allitems
+
       /* this.getCategories() */
       this.getTags()
     })
