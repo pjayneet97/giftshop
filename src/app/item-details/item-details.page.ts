@@ -29,17 +29,21 @@ export class ItemDetailsPage implements OnInit {
   slideOpts = {
     effect: 'flip'
   };
-  constructor(private modalController: ModalController,public loadingController: LoadingController,private storage:AngularFireStorage, public toastController: ToastController,public navCtrl:NavController,public modlCtrl:ModalController ,public route:ActivatedRoute,public itemservice:ItemService) { }
+  loading=true
+  constructor(private modalController: ModalController,private storage:AngularFireStorage, public toastController: ToastController,public navCtrl:NavController,public modlCtrl:ModalController ,public route:ActivatedRoute,public itemservice:ItemService) { }
 
   ngOnInit() {
     this.presentLoading()
-    this.route.params.subscribe(id=>{
-    this.itemservice.getItem(id.id).subscribe(data=>{
-      this.item=data[0]
-      this.item.image_url.forEach(url => {
-        console.log(url)
-        this.display.push(this.storage.ref(url).getDownloadURL())
-      });
+    this.route.params.subscribe(data=>{
+    this.itemservice.getItem(data.id).subscribe(docs=>{
+      docs.forEach(doc=>{
+        this.item=doc.data()
+        this.item.image_url.forEach(url => {
+          this.display.push(this.storage.ref(url).getDownloadURL())
+        });
+      })
+      /* this.loadingController.dismiss() */
+      this.dismissLoading()
     })
     })
 
@@ -75,12 +79,15 @@ export class ItemDetailsPage implements OnInit {
     toast.present();
   }
 
-  async presentLoading() {
-    const loading = await this.loadingController.create({
-      message: 'Please wait',
-      duration: 1000
+  presentLoading() {
+    /* const loading = await this.loadingController.create({
+      message: 'Please wait'
     });
-    return await loading.present();
+    return await loading.present(); */
+    this.loading=true
+  }
+  dismissLoading(){
+    this.loading=false
   }
 
   openPreview(img) {

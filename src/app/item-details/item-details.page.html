@@ -1,11 +1,4 @@
-<!-- <ion-header>
-  <ion-toolbar>
-      <ion-buttons slot="start">
-          <ion-icon style="font-size: 40px" (click)="listAll()" name="arrow-back"></ion-icon>
-      </ion-buttons>
-    <ion-title><p>{{item.id}}</p></ion-title>
-  </ion-toolbar>
-</ion-header> -->
+
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
@@ -18,16 +11,12 @@
 </ion-header>
 
 <ion-content>
+       <ng-container *ngIf="!loading">
         <ion-row>
-          <ion-col size="12" size-lg="1">         
-          </ion-col>
           <ion-col size="12" size-lg="3">                
               <ion-slides pager="true" [options]="slideOpts">
                 <ion-slide *ngFor="let image of display">
                   <img tappable (click)="openPreview(display)" style="max-height:200px;" class="center" [src]="image|async" onError="this.src='../../../assets/items/blank.png'">
-                </ion-slide>
-                <ion-slide *ngIf="item.vedio_url" padding>
-                    <iframe class="center" width="100%" height="200px" [src]="item.vedio_url|safe" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </ion-slide>
               </ion-slides>
 
@@ -41,7 +30,9 @@
                   </div>
           </ion-col>
           <ion-col style="margin-top:-5px;" size="12" size-lg="6" class="item-detail" padding>
-
+            <div *ngIf="item.vedio_url">
+              <iframe class="center" width="100%" height="200px" [src]="item.vedio_url|safe" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
                         
                         <h5><ion-icon name="gift"></ion-icon> Description</h5>
 
@@ -63,4 +54,8 @@
         </ion-col>
       
         </ion-row>
+       </ng-container>
+       <ng-container>
+        <div *ngIf="loading" class="loadingspinner"></div>
+       </ng-container>
 </ion-content>

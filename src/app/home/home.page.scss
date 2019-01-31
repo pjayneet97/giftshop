@@ -23,3 +23,35 @@ div.scrollmenu a:hover {
   color:rgb(255, 255, 255);
   cursor:pointer;
 }
+// loading
+// Feel free to use the code below <3
+// Add border top/right/left/bottom colors for more variations.
+
+.loadingspinner {
+  margin: auto;
+	pointer-events: none;
+	width: 2.5em;
+	height: 2.5em;
+	border: 0.4em solid transparent;
+	border-color: #eee;
+	border-top-color: #3E67EC;
+	border-radius: 50%;
+	animation: loadingspin 1s linear infinite;
+}
+
+@keyframes loadingspin {
+	100% {
+			transform: rotate(360deg)
+	}
+}
+
+
+///////////////////////////////////////////////////////////////
+body {
+	height: 100vh;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}

@@ -26,11 +26,32 @@
           <ion-col size="12" size-lg="1">
           </ion-col>
           <ion-col size="12" size-lg="10">
-                <ion-row style="padding:0px;">
+                <ion-row *ngIf="mode=='All'" style="padding:0px;">
                   <ion-col style="padding:0px;" size="12" size-lg="4" size-md="6" *ngFor="let item of items">
                     <app-item-card [item]="item"></app-item-card>
                   </ion-col>
+
+                  <ion-infinite-scroll threshold="800px" (ionInfinite)="getProducts($event)">
+                    <ion-infinite-scroll-content>
+                      <div class="loadingspinner"></div>
+                    </ion-infinite-scroll-content>
+                  </ion-infinite-scroll>
+
                 </ion-row>
+
+                <ion-row *ngIf="mode=='tag'" style="padding:0px;">
+                  <ion-col style="padding:0px;" size="12" size-lg="4" size-md="6" *ngFor="let item of itemsbytag">
+                    <app-item-card [item]="item"></app-item-card>
+                  </ion-col>
+
+                  <ion-infinite-scroll threshold="100px" (ionInfinite)="getmoreByItem($event)">
+                    <ion-infinite-scroll-content>
+                      <div class="loadingspinner"></div>
+                    </ion-infinite-scroll-content>
+                  </ion-infinite-scroll>
+
+                </ion-row>
+
           </ion-col>
           <ion-col size="12" size-lg="1">
             

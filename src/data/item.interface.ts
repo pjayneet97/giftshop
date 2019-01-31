@@ -3,7 +3,7 @@ export interface Item{
     fid?:string	
     id?:string
     title?:string
-    image_url?:string[]
+    image_url?:any[]
     vedio_url?:string
     price?:number
     about?:string

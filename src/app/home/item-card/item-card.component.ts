@@ -19,11 +19,11 @@ export class ItemCardComponent implements OnInit {
    }
 
   ngOnInit() {
-      this.getImage()
+      /* this.getImage() */
   }
-  async getImage(){
+/*   async getImage(){
     this.display=this.storage.ref(this.item.image_url[0]).getDownloadURL()
-  }
+  } */
   async buyNow(){
     const modal = await this.modlCtrl.create({
       component: EnquiryPage,

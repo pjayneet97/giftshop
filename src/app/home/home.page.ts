@@ -3,6 +3,7 @@ import { Item } from 'src/data/item.interface';
 import { ModalController, LoadingController } from '@ionic/angular';
 import { ItemService } from '../services/item.service';
 import { AngularFireStorage } from '@angular/fire/storage';
+import { docChanges } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-home',
@@ -11,41 +12,42 @@ import { AngularFireStorage } from '@angular/fire/storage';
 })
 export class HomePage implements OnInit {
   covers=[]
+  mode='All'
+  selectedtag
   slideOpts = {
     effect: 'flip'
   };
   categories=[]
-  allitems:Item[]
+  allitems:Item[]=[]
   items:Item[]
   selectedItem:Item
   tags=[]
+  itemsbytag=[]
+  lastdoc=null
+  lastdoctag=null
   constructor(public storage:AngularFireStorage,public loadingController: LoadingController,private modlCtrl:ModalController,public itemService:ItemService ){
 
   }
   ngOnInit(){    
-    this.presentLoading()
-    this.itemService.getAll().subscribe(data=>{
-      this.allitems=data
-      this.items=this.allitems
-
-      /* this.getCategories() */
-      this.getTags()
-    })
+    this.getProducts()
     this.getCover()
+    this.getTags()
 
 
   }
   filter(tag:string){
-/*     this.items=this.allitems.filter(element=>{
-      if(category.toLowerCase()=='all'){
-        return true
-      }
-      else{
-        return (element.category.toLowerCase()==category.toLowerCase())
-      }
-    }) */
-    this.items=[]
-    this.allitems.forEach(element=>{
+    this.lastdoctag=null
+    if(tag=='All'){
+      this.mode='All'
+    }
+    else{
+      this.selectedtag=tag
+      this.itemsbytag=[]
+      this.getItemsByTag(tag)
+      this.mode='tag'
+    }
+
+/*     this.allitems.forEach(element=>{
       if(tag.toLowerCase()=='all'){
         this.items.push(element)
       }
@@ -59,13 +61,12 @@ export class HomePage implements OnInit {
         })
       }
     })
-    console.log(this.items)
+    console.log(this.items) */
   }
 
   async presentLoading() {
     const loading = await this.loadingController.create({
-      message: 'Please wait',
-      duration: 2000
+      message: 'Please wait'
     });
     return await loading.present();
   }
@@ -91,13 +92,74 @@ export class HomePage implements OnInit {
     
   }
   getTags(){
-    this.allitems.forEach(element=>{
+/*     this.allitems.forEach(element=>{
       element.tags.forEach(data=>{
         if(this.tags.indexOf(data)==-1){
           this.tags.push(data)
         }
       })
+    }) */
+    this.tags=['All','Handmade','Valentine','Graphics','Bouquet','Crafts','Cards','Accessories']
+    
+  }
+
+  getProducts(event?){
+    if(this.lastdoc==null){
+      this.itemService.getAll().subscribe(data=>{
+        this.lastdoc=data.docs[data.docs.length-1]
+        data.forEach(doc=>{
+          this.allitems.push(doc.data())
+        })
+        this.allitems.forEach(element=>{
+          if(element.image_url[0]){
+            element.image_url[0]=this.storage.ref(element.image_url[0]).getDownloadURL()
+          }
+        })
+        this.items=this.allitems
+      })
+    }
+    else{
+      console.log('called')
+      this.itemService.getNext(this.lastdoc).subscribe(data=>{
+        this.lastdoc=data.docs[data.docs.length-1]
+        data.forEach(doc=>{
+          let item = doc.data()
+          if(item.image_url[0]){
+            item.image_url[0]=this.storage.ref(item.image_url[0]).getDownloadURL()
+          }
+          this.allitems.push(item)
+        })
+        this.items=this.allitems
+      })
+      event.target.complete();
+    }
+  }
+  getItemsByTag(tag:string){
+    this.itemService.getItemsbyTag(tag).subscribe(data=>{
+      this.lastdoctag=data.docs[data.docs.length-1]
+      data.forEach(doc=>{
+        let item = doc.data()
+          if(item.image_url[0]){
+            item.image_url[0]=this.storage.ref(item.image_url[0]).getDownloadURL()
+          }
+        this.itemsbytag.push(item)
+      })
     })
+  }
+
+  getmoreByItem(event){
+      this.itemService.getNextbyTag(this.lastdoctag,this.selectedtag).subscribe(data=>{
+        this.lastdoctag=data.docs[data.docs.length-1]
+        data.forEach(doc=>{
+          let item = doc.data()
+          if(item.image_url[0]){
+            item.image_url[0]=this.storage.ref(item.image_url[0]).getDownloadURL()
+          }
+            this.itemsbytag.push(item)
+          
+        })
+      })
+      event.target.complete();
     
   }
 
